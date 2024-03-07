@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = "Determines and shows the difference between two configuration files"
+authors = ["Irken Ivaev <ofs.iri@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "gendiff" },]
+repository = "https://github.com/Eric-tech777/python-project-50"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Intended Audience :: Other Audience",
+  "Environment :: Console",
+  "Operating System :: Unix",
+  ]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
