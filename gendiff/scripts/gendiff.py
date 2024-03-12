@@ -48,8 +48,7 @@ def generate_diff(path1, path2):
             mark = '+'
         return mark
 
-    result_string1 = [f'  {get_mark(item)}\
- {item[0]}: {str(item[1]).lower()}\n' for item in sorted_list3]
+    result_string1 = [f'  {get_mark(item)} {item[0]}: {str(item[1]).lower()}\n' for item in sorted_list3]
 
     print(f"{{\n{''.join(result_string1)}}}")
 
