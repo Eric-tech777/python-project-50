@@ -2,14 +2,16 @@
 import argparse
 import json
 
+
 def main():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
+    parser = argparse.ArgumentParser(description='Compares two configuration\
+    files and shows a difference.')
     parser.add_argument('first_file', type=str)
     parser.add_argument('second_file', type=str)
     parser.add_argument("-f ", "--format", help='set format of output')
     args = parser.parse_args()
     generate_diff(args.first_file, args.second_file)
-    
+
 
 def generate_diff(path1, path2):
     dict1 = json.load(open(path1))
@@ -46,8 +48,9 @@ def generate_diff(path1, path2):
             mark = '+'
         return mark
 
-    result_string1 = [f'  {get_mark(item)} {item[0]}: {str(item[1]).lower()}\n' for item in sorted_list3]
-    
+    result_string1 = [f'  {get_mark(item)}\
+ {item[0]}: {str(item[1]).lower()}\n' for item in sorted_list3]
+
     print(f"{{\n{''.join(result_string1)}}}")
 
 
