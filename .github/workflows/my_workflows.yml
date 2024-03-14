@@ -1,14 +1,13 @@
 name: Automated testing and linting
 
 on:
-	- push
-	- pull_request
+  - push
 
 jobs:
   build:
   runs-on: ubuntu-latest
-	matrix:
-		python-version: [3.8, 3.9]
+matrix:
+	  python-version: [3.8, 3.9]
 steps:
 	- name: Checkout repository
 	- uses: actions/checkout@v4
