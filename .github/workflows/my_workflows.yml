@@ -22,6 +22,5 @@ jobs:
           make install
       - name: Run tests
         run: pytest
-      - name: run lint
 
 
