@@ -65,5 +65,4 @@ def tip_out(sorted_result_list, list1, list2):
  {str(item[1]).lower()}\n' for item in sorted_result_list]
 # сбор отчета для вывода на печать
     result = f"{{\n{''.join(string_to_join)}}}"
-    print(result)
     return result
