@@ -1,0 +1,25 @@
+{  
+   "roster1":{  
+      "player0":{  
+         "sports":"NFL",
+         "firstname":"Tyrod"
+      },
+      "player1":{  
+         "sport":"NFLO",
+         "firstname":"Lamar",
+         "surname":"Miller"
+      }
+   },
+   "roster2":{  
+      "player0":{  
+         "sport":"NFL",
+         "firstname":"Carlson",
+         "lastname":"Palmer"
+      },
+      "toto":{  
+         "sport":"NFL",
+         "company":"Davidoff",
+         "lastname":"Johnson"
+      }
+   }
+}
