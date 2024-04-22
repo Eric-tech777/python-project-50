@@ -1,7 +1,7 @@
 from gendiff.scripts.gendiff import make_yml_dicts
 
 
-def test_yml_dicts():
+def test_yaml_dicts():
     path_yaml1 = "file_1.yaml"
     path_yaml2 = "file_2.yaml"
     assert make_yml_dicts(path_yaml1, path_yaml2) == (

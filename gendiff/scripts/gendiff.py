@@ -2,7 +2,9 @@
 import argparse
 import json
 import yaml
-from gendiff.scripts.comparator import data_parser
+from gendiff.scripts.comparator import comparator, order_dict
+from gendiff.formaters.stylish import stylish
+from gendiff.formaters.plain import plain
 
 
 def main():  # парсинг путей к файлам
@@ -10,15 +12,16 @@ def main():  # парсинг путей к файлам
     files and shows a difference.')
     parser.add_argument('first_file', type=str)
     parser.add_argument('second_file', type=str)
-    parser.add_argument("-f ", "--format", help='set format of output')
+    parser.add_argument("-f", "--format", type=str,
+                        default="stylish", help='set format of output')
     args = parser.parse_args()
 
     # вызов функции generate_diff с передачей адресов файлов
-    generate_diff(args.first_file, args.second_file)
+    generate_diff(args.first_file, args.second_file, args.format)
 
 
 # вывод словаря1 и словаря2 по результату получения путей к файлу1 и файлу2
-def generate_diff(path_file1, path_file2):
+def generate_diff(path_file1, path_file2, format_name):
     dict1, dict2 = '', ''
     if path_file1.endswith('json') and path_file2.endswith('json'):
         dict1, dict2 = make_json_dicts(path_file1, path_file2)
@@ -29,7 +32,15 @@ def generate_diff(path_file1, path_file2):
     elif path_file1.endswith('yaml') and path_file2.endswith('yaml'):
         dict1, dict2 = make_yml_dicts(path_file1, path_file2)
 
-    data_parser(dict1, dict2)
+# **вызов модуля comparator для получения представления (словаря с diff)**
+    comparator(dict1, dict2)
+    data1 = comparator(dict1, dict2)
+    data2 = order_dict(data1)
+
+    if format_name == 'plain':
+        plain(data2)
+    else:
+        print(stylish(data2))
 
 
 # чтение файлов json

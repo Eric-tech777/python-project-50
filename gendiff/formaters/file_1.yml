@@ -1,0 +1,18 @@
+roster1:
+  player0:
+    sport: NFL
+    firstname: Tyrod
+    lastname: Taylor
+  player1:
+    sport: NFL
+    firstname: Lamar
+    lastname: Miller
+roster2:
+  player0:
+    sport: NFL
+    firstname: Carson
+    lastname: Palmer
+  player1:
+    sport: NFL
+    firstname: David
+    lastname: Johnson

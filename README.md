@@ -5,4 +5,5 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/957f4c9a0d7cf059a926/test_coverage)](https://codeclimate.com/github/Eric-tech777/python-project-50/test_coverage)
 [![asciicast](https://asciinema.org/a/KEzkz2aKeiYyMfaW9TugRfeYQ.svg)](https://asciinema.org/a/KEzkz2aKeiYyMfaW9TugRfeYQ)
 [![asciicast](https://asciinema.org/a/rMCQGGqVO7AILHynWd5YsZ5RR.svg)](https://asciinema.org/a/rMCQGGqVO7AILHynWd5YsZ5RR)
+[![asciicast](https://asciinema.org/a/UxC11cNyFUlzQ85SUBp44jEpd.svg)](https://asciinema.org/a/UxC11cNyFUlzQ85SUBp44jEpd)
 
