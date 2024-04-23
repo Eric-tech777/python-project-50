@@ -5,6 +5,7 @@ import yaml
 from gendiff.scripts.comparator import comparator, order_dict
 from gendiff.formaters.stylish import stylish
 from gendiff.formaters.plain import plain
+from gendiff.formaters.json import make_json
 
 
 def main():  # парсинг путей к файлам
@@ -39,6 +40,9 @@ def generate_diff(path_file1, path_file2, format_name):
 
     if format_name == 'plain':
         plain(data2)
+    elif format_name == 'json':
+        print(make_json(data2))
+
     else:
         print(stylish(data2))
 
