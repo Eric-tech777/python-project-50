@@ -8,7 +8,7 @@ from gendiff.formaters.plain import plain
 from gendiff.formaters.json import make_json
 
 
-def main():  # парсинг путей к файлам
+def main():  # парсинг путей к файлам и указание форматера по умолчанию
     parser = argparse.ArgumentParser(description='Compares two configuration\
     files and shows a difference.')
     parser.add_argument('first_file', type=str)
@@ -17,7 +17,7 @@ def main():  # парсинг путей к файлам
                         default="stylish", help='set format of output')
     args = parser.parse_args()
 
-    # вызов функции generate_diff с передачей адресов файлов
+    # вызов функции generate_diff с передачей адресов файлов и формата вывода
     generate_diff(args.first_file, args.second_file, args.format)
 
 
@@ -38,11 +38,11 @@ def generate_diff(path_file1, path_file2, format_name):
     data1 = comparator(dict1, dict2)
     data2 = order_dict(data1)
 
+# вызов форматеров
     if format_name == 'plain':
         plain(data2)
     elif format_name == 'json':
         print(make_json(data2))
-
     else:
         print(stylish(data2))
 

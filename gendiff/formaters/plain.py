@@ -10,7 +10,7 @@ def plain(ini_dict):
         print(i)
 
 
-# Получить выборку ключей с +/-
+# Получить выборку ключей с изменениями (+/-)
 list_of_keys = []
 
 
@@ -26,7 +26,7 @@ def get_keys_list(some_dict):
     return list_of_keys
 
 
-# Получить значения для ключей с +/-
+# Получить значения для ключей с изменениями
 list_of_values = []
 
 
@@ -42,7 +42,7 @@ def get_list_of_values(some_dict):
     return list_of_values
 
 
-# Получить путь до ключа (включая сам ключ)
+# Получить путь до ключей с изменениями (включая сам ключ)
 paths_list = []
 
 
@@ -61,12 +61,14 @@ def find_path(in_dict, key):
     return resp
 
 
+# Вызывающая функция по получению путей
 def get_paths(in_dict, k_list):
     for key in k_list:
         paths_list.append(find_path(in_dict, key))
     return paths_list
 
 
+# Очистка путей от маркировки (+/-)
 def fix_paths_list(path_list):
     fin_paths_list = []
     for row in path_list:
@@ -77,7 +79,7 @@ def fix_paths_list(path_list):
     return fin_paths_list
 
 
-# Получаем выборку ключ, путь, значение для сортировки
+# Получить сводную выборку ключ, путь, значение для сортировки
 def merge_list_to_sort(list_keys, list_of_paths, list_values):
     merged_list = [(list_keys[i], list_of_paths[i], list_values[i])
                    for i in range(0, len(list_keys))]
@@ -85,6 +87,7 @@ def merge_list_to_sort(list_keys, list_of_paths, list_values):
     return merged_list
 
 
+# Получить строки с указанием характера изменений ключей
 def get_data_frame(d):
     frame_of_data = []
     for i in range(len(d)):
@@ -136,6 +139,7 @@ def get_data_frame(d):
     return frame_of_data
 
 
+# Приведение bool значений в соответствие с требованием к проекту
 def fix_frame(frame0):
     frame1 = [x.replace("'False'", "false") for x in frame0]
     frame2 = [x.replace("'None'", "null") for x in frame1]
