@@ -1,21 +1,12 @@
 from gendiff.formaters.plain import get_list_of_values
+import ast
 
 
 def test_get_values():
-    ini_dict = {
-        '  roster1': {'  player0': {
-            '  firstname': 'Tyrod', '- lastname': 'Taylor', '- sport': 'NFL',
-            '+ sports': 'NFL'}, '  player1': {
-            '  firstname': 'Lamar', '- lastname': 'Miller', '- sport': 'NFL',
-            '+ sport': 'NFLO', '+ surname': 'Miller'}}, '  roster2': {
-            '  player0': {'- firstname': 'Carson', '+ firstname': 'Carlson',
-                          '  lastname': 'Palmer', '  sport': 'NFL'},
-            '- player1': {'firstname': 'David', 'lastname': 'Johnson',
-                          'sport': 'NFL'}, '+ toto': {
-                'company': 'Davidoff', 'lastname': 'Johnson', 'sport': 'NFL'}}}
-
-    assert get_list_of_values(ini_dict) == [
-        'Taylor', 'NFL', 'NFL', 'Miller', 'NFL', 'NFLO', 'Miller', 'Carson',
-        'Carlson', {'firstname': 'David', 'lastname': 'Johnson',
-                    'sport': 'NFL'}, {'company': 'Davidoff',
-                                      'lastname': 'Johnson', 'sport': 'NFL'}]
+    with (open('fixtures/ini_dict_values_1.txt', 'r', encoding='utf-8')
+          as dict_1):
+        ini_dict = ast.literal_eval(dict_1.read().strip())
+    with (open('fixtures/for_list_of_values_1.txt', 'r', encoding='utf-8')
+          as list_1):
+        result = ast.literal_eval(list_1.read().strip())
+    assert get_list_of_values(ini_dict) == result

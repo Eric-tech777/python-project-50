@@ -1,5 +1,11 @@
 # получение diff по результату сравнения вложенных словарей
-def comparator(dict1, dict2):
+def run_compare(dict1, dict2):
+    draft_frame = dicts_compare(dict1, dict2)
+    frame_to_print = order_dict(draft_frame)
+    return frame_to_print
+
+
+def dicts_compare(dict1, dict2):
     the_same = (list(dict1.keys() & dict2.keys()))  # ключи без изменений
     removed = (list(dict1.keys() - dict2.keys()))  # удаленные ключи
     added = (list(dict2.keys() - dict1.keys()))  # добавленные ключи
@@ -10,7 +16,7 @@ def comparator(dict1, dict2):
     for i in the_same:
         if dict1[i] != dict2[i]:
             if isinstance(dict1[i], dict) and isinstance(dict2[i], dict):
-                result["  " + i] = comparator(dict1[i], dict2[i])
+                result["  " + i] = dicts_compare(dict1[i], dict2[i])
             else:
                 result["- " + i] = dict1[i]
                 result["+ " + i] = dict2[i]

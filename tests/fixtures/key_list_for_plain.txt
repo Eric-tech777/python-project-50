@@ -1,0 +1,3 @@
+['- lastname', '- sport', '+ sports', '- lastname',
+                 '- sport', '+ sport', '+ surname', '- firstname',
+                 '+ firstname', '- player1', '+ toto']

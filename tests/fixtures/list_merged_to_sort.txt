@@ -1,0 +1,14 @@
+[
+        ('- lastname', 'roster1.player1.lastname', 'Taylor'),
+        ('- sport', 'roster1.player1.sport', 'NFL'),
+        ('+ sports', 'roster1.player0.sports', 'NFL'),
+        ('- lastname', 'roster1.player1.lastname', 'Miller'),
+        ('- sport', 'roster1.player1.sport', 'NFL'),
+        ('+ sport', 'roster1.player1.sport', 'NFLO'),
+        ('+ surname', 'roster1.player1.surname', 'Miller'),
+        ('- firstname', 'roster2.player0.firstname', 'Carson'),
+        ('+ firstname', 'roster2.player0.firstname', 'Carlson'),
+        ('- player1', 'roster2.player1', {
+            'firstname': 'David', 'lastname': 'Johnson', 'sport': 'NFL'}),
+        ('+ toto', 'roster2.toto', {'company': 'Davidoff',
+                                    'lastname': 'Johnson', 'sport': 'NFL'})]

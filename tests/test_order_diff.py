@@ -1,31 +1,12 @@
-from gendiff.scripts.comparator import order_dict
+from gendiff.diff_generator.comparator import order_dict
+import ast
 
 
 def test_order_diff():
-    dict_to_order = {
-        '  roster1': {'  player0': {'  firstname': 'Tyrod', '+ sports': 'NFL',
-                                    '- lastname': 'Taylor', '- sport': 'NFL'},
-                      '  player1': {'  firstname': 'Lamar', '- sport': 'NFL',
-                                    '+ sport': 'NFLO', '+ surname': 'Miller',
-                                    '- lastname': 'Miller'}},
-        '  roster2': {'  player0': {'  lastname': 'Palmer', '  sport': 'NFL',
-                                    '- firstname': 'Carson',
-                                    '+ firstname': 'Carlson'},
-                      '+ toto': {'sport': 'NFL', 'company': 'Davidoff',
-                                 'lastname': 'Johnson'},
-                      '- player1': {'sport': 'NFL', 'firstname': 'David',
-                                    'lastname': 'Johnson'}}}
-    assert order_dict(dict_to_order) == {
-        '  roster1': {'  player0': {'  firstname': 'Tyrod',
-                                    '- lastname': 'Taylor', '- sport': 'NFL',
-                                    '+ sports': 'NFL'},
-                      '  player1': {'  firstname': 'Lamar',
-                                    '- lastname': 'Miller', '- sport': 'NFL',
-                                    '+ sport': 'NFLO', '+ surname': 'Miller'}},
-        '  roster2': {'  player0': {'- firstname': 'Carson',
-                                    '+ firstname': 'Carlson',
-                                    '  lastname': 'Palmer', '  sport': 'NFL'},
-                      '- player1': {'firstname': 'David',
-                                    'lastname': 'Johnson', 'sport': 'NFL'},
-                      '+ toto': {'company': 'Davidoff', 'lastname': 'Johnson',
-                                 'sport': 'NFL'}}}
+    with (open('fixtures/dict_to_order_1.txt', 'r', encoding='utf-8')
+          as dict_to_sort):
+        dict_to_order = ast.literal_eval(dict_to_sort.read().strip())
+    with (open('fixtures/sorted_dict_1.txt', 'r', encoding='utf-8')
+          as sorted_dict):
+        result = ast.literal_eval(sorted_dict.read().strip())
+    assert order_dict(dict_to_order) == result

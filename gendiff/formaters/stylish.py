@@ -2,10 +2,10 @@ import json
 
 
 # Форматер stylish
-def stylish(data, replacer=' ', count_space=4, rank=1):
-    if isinstance(data, dict):
+def stylish(ini_dict, replacer=' ', count_space=4, rank=1):
+    if isinstance(ini_dict, dict):
         result = '{\n'
-        for elem, value in data.items():
+        for elem, value in ini_dict.items():
             if elem[0:2] in ['+ ', '- ', '  ']:
                 some = 2
             else:
@@ -20,6 +20,6 @@ def stylish(data, replacer=' ', count_space=4, rank=1):
             result += stylish(value, replacer, count_space, rank + 1) + '\n'
         result += replacer * count_space * (rank - 1) + '}'
     else:
-        result = str(data)
+        result = str(ini_dict)
 
     return result

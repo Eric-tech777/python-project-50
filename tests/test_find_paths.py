@@ -1,26 +1,15 @@
 from gendiff.formaters.plain import get_paths
+import ast
 
 
 def test_find_paths():
-    ini_dict = {'  roster1': {'  player0': {
-        '  firstname': 'Tyrod', '- lastname': 'Taylor', '- sport': 'NFL',
-        '+ sports': 'NFL'}, '  player1': {
-        '  firstname': 'Lamar', '- lastname': 'Miller', '- sport': 'NFL',
-        '+ sport': 'NFLO', '+ surname': 'Miller'}}, '  roster2': {
-        '  player0': {'- firstname': 'Carson', '+ firstname': 'Carlson',
-                      '  lastname': 'Palmer', '  sport': 'NFL'},
-        '- player1': {'firstname': 'David', 'lastname': 'Johnson',
-                      'sport': 'NFL'}, '+ toto': {'company': 'Davidoff',
-                                                  'lastname': 'Johnson',
-                                                  'sport': 'NFL'}}}
-    keys_list = ['- lastname', '- sport', '+ sports', '- lastname',
-                 '- sport', '+ sport', '+ surname', '- firstname',
-                 '+ firstname', '- player1', '+ toto']
-
-    assert get_paths(ini_dict, keys_list) == [
-        '  roster1.  player1.- lastname', '  roster1.  player1.- sport',
-        '  roster1.  player0.+ sports', '  roster1.  player1.- lastname',
-        '  roster1.  player1.- sport', '  roster1.  player1.+ sport',
-        '  roster1.  player1.+ surname', '  roster2.  player0.- firstname',
-        '  roster2.  player0.+ firstname', '  roster2.- player1',
-        '  roster2.+ toto']
+    with (open('fixtures/ini_dict_for_plain.txt', 'r', encoding='utf-8')
+          as ini_dict_1):
+        ini_dict = ast.literal_eval(ini_dict_1.read().strip())
+    with (open('fixtures/key_list_for_plain.txt', 'r', encoding='utf-8')
+          as keys_list_1):
+        keys_list = ast.literal_eval(keys_list_1.read().strip())
+    with (open('fixtures/paths_for_plain.txt', 'r', encoding='utf-8')
+          as paths_plain):
+        result = ast.literal_eval(paths_plain.read().strip())
+    assert get_paths(ini_dict, keys_list) == result

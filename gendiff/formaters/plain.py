@@ -79,7 +79,7 @@ def fix_paths_list(path_list):
     return fin_paths_list
 
 
-# Получить сводную выборку ключ, путь, значение для сортировки
+# Получить сводную выборку - ключ, путь, значение для сортировки
 def merge_list_to_sort(list_keys, list_of_paths, list_values):
     merged_list = [(list_keys[i], list_of_paths[i], list_values[i])
                    for i in range(0, len(list_keys))]

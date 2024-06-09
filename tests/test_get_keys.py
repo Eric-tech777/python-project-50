@@ -1,20 +1,11 @@
 from gendiff.formaters.plain import get_keys_list
+import ast
 
 
-def test_order_diff():
-    ini_dict = {
-        '  roster1': {'  player0': {
-            '  firstname': 'Tyrod', '- lastname': 'Taylor', '- sport': 'NFL',
-            '+ sports': 'NFL'}, '  player1': {
-            '  firstname': 'Lamar', '- lastname': 'Miller', '- sport': 'NFL',
-            '+ sport': 'NFLO', '+ surname': 'Miller'}}, '  roster2': {
-            '  player0': {'- firstname': 'Carson', '+ firstname': 'Carlson',
-                          '  lastname': 'Palmer', '  sport': 'NFL'},
-            '- player1': {'firstname': 'David', 'lastname': 'Johnson',
-                          'sport': 'NFL'}, '+ toto': {
-                'company': 'Davidoff', 'lastname': 'Johnson', 'sport': 'NFL'}}}
-
-    assert get_keys_list(ini_dict) == [
-        '- lastname', '- sport', '+ sports', '- lastname', '- sport',
-        '+ sport', '+ surname', '- firstname', '+ firstname', '- player1',
-        '+ toto']
+def test_get_keys_list():
+    with open('fixtures/ini_dict_1.txt', 'r', encoding='utf-8') as dict_ini:
+        ini_dict = ast.literal_eval(dict_ini.read().strip())
+    with (open('fixtures/keys_list_1.txt', 'r', encoding='utf-8')
+          as list_of_keys):
+        result = ast.literal_eval(list_of_keys.read().strip())
+    assert get_keys_list(ini_dict) == result

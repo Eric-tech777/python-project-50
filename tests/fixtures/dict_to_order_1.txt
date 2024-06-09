@@ -1,0 +1,13 @@
+{
+        '  roster1': {'  player0': {'  firstname': 'Tyrod', '+ sports': 'NFL',
+                                    '- lastname': 'Taylor', '- sport': 'NFL'},
+                      '  player1': {'  firstname': 'Lamar', '- sport': 'NFL',
+                                    '+ sport': 'NFLO', '+ surname': 'Miller',
+                                    '- lastname': 'Miller'}},
+        '  roster2': {'  player0': {'  lastname': 'Palmer', '  sport': 'NFL',
+                                    '- firstname': 'Carson',
+                                    '+ firstname': 'Carlson'},
+                      '+ toto': {'sport': 'NFL', 'company': 'Davidoff',
+                                 'lastname': 'Johnson'},
+                      '- player1': {'sport': 'NFL', 'firstname': 'David',
+                                    'lastname': 'Johnson'}}}
