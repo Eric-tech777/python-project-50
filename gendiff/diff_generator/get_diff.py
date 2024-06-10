@@ -13,7 +13,7 @@ def start_diff():
     generate_diff(args.first_file, args.second_file, args.format)
 
 
-def generate_diff(path_file1, path_file2, format_name):  # 1
+def generate_diff(path_file1, path_file2, format_name='stylish'):  # 1
     type_of_files = get_files_type(path_file1, path_file2)  # 2
     dict_1, dict_2 = make_dicts(path_file1, path_file2, type_of_files)  # 3
     frame_to_print = perform_compare(dict_1, dict_2)  # 4
