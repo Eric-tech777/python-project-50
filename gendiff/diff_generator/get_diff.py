@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os.path
 from gendiff.diff_generator.paths_parser import path_parser
 import json
 import yaml
@@ -33,10 +34,10 @@ def get_files_type(path1, path2):  # 2
 def make_dicts(path1, path2, type_of_file):  # 3
     dict1 = ''
     dict2 = ''
-    with open('/home/irken/Hexlet_2/python-project-50/'
-              'tests/fixtures/' + path1, 'r', encoding='utf-8') as path_1:
-        with open('/home/irken/Hexlet_2/python-project-50/'
-                  'tests/fixtures/' + path2, 'r', encoding='utf-8') as path_2:
+    with open(os.path.join(os.path.dirname(path1), 'tests', 'fixtures'
+                           ) + '/' + path1, 'r', encoding='utf-8') as path_1:
+        with open(os.path.join(os.path.dirname(path1), 'tests', 'fixtures')
+                  + '/' + path2, 'r', encoding='utf-8') as path_2:
             if type_of_file == 'json':
                 dict1 = json.load(path_1)
                 dict2 = json.load(path_2)
