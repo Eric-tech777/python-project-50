@@ -10,5 +10,5 @@ def test_yaml_dicts():
         dict1, dict2 = ast.literal_eval(yaml_dicts.read().strip())
     previous = os.getcwd()
     os.chdir(os.path.dirname(os.getcwd()))
-    assert make_dicts('file_1.', 'file_2.yaml', 'yaml') == (dict1, dict2)
+    assert make_dicts('file_1.yaml', 'file_2.yaml', 'yaml') == (dict1, dict2)
     os.chdir(previous)
