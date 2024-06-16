@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def test_fix_paths():
-    with open(Path.cwd() / 'tests/fixtures/paths_list_1.txt', 'r',
+    with open(Path.cwd() / 'tests/fixtures/paths_list1.txt', 'r',
               encoding='utf-8') as list_of_paths:
         paths_list = ast.literal_eval(list_of_paths.read().strip())
     with open(Path.cwd() / 'tests/fixtures/fixed_paths_list.txt', 'r',

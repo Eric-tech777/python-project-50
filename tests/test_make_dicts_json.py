@@ -10,5 +10,5 @@ def test_json_dicts():
         dict1, dict2 = ast.literal_eval(json_dicts.read().strip())
     previous = os.getcwd()
     os.chdir(os.path.dirname(os.getcwd()))
-    assert make_dicts('file_1.json', 'file_2.json', 'json') == (dict1, dict2)
+    assert make_dicts('jsonfile1.json', 'jsonfile2.json', 'json') == (dict1, dict2)
     os.chdir(previous)
