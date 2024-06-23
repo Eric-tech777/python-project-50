@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import os.path
-import os
 from pathlib import Path
 from gendiff.diff_generator.paths_parser import path_parser
 import json
@@ -20,7 +18,14 @@ def generate_diff(path_file1, path_file2, format_name='stylish'):  # 1
     type_of_files = get_files_type(path_file1, path_file2)  # 2
     dict_1, dict_2 = make_dicts(path_file1, path_file2, type_of_files)  # 3
     frame_to_print = perform_compare(dict_1, dict_2)  # 4
-    release_diff(frame_to_print, format_name)  # 5
+    result = release_diff(frame_to_print, format_name)  # 5
+    if format_name == 'plain':
+        for i in result:
+            print(i)
+        return result
+    else:
+        print(result)
+        return result
 
 
 def get_files_type(path1, path2):  # 2
@@ -36,7 +41,6 @@ def get_files_type(path1, path2):  # 2
 def make_dicts(path1, path2, type_of_file):  # 3
     dict1 = ''
     dict2 = ''
-    print(Path.cwd())
     with open(Path.cwd() / 'tests/fixtures/' / path1, 'r',
               encoding='utf-8') as path_1:
         with open(Path.cwd() / 'tests/fixtures/' / path2, 'r',
@@ -62,8 +66,8 @@ def perform_compare(dict1, dict2):
 # вызов форматеров
 def release_diff(frame_to_print, format_name):  # 5
     if format_name == 'plain':
-        plain(frame_to_print)
+        return plain(frame_to_print)
     elif format_name == 'json':
-        print(make_json(frame_to_print))
+        return make_json(frame_to_print)
     else:
-        print(stylish(frame_to_print))
+        return stylish(frame_to_print)

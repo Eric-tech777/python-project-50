@@ -5,9 +5,8 @@ def plain(ini_dict):
     fin_paths_list = fix_paths_list(list_of_paths)
     list_to_sort = merge_list_to_sort(keys_list, fin_paths_list, values_list)
     frame = get_data_frame(list_to_sort)
-    data_frame = fix_frame(frame)
-    for i in data_frame:
-        print(i)
+    data_frame_to_print = fix_frame(frame)
+    return data_frame_to_print
 
 
 # Получить выборку ключей с изменениями (+/-)
