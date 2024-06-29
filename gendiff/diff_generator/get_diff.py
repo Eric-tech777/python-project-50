@@ -41,9 +41,9 @@ def get_files_type(path1, path2):  # 2
 def make_dicts(path1, path2, type_of_file):  # 3
     dict1 = ''
     dict2 = ''
-    with open(Path.cwd() / 'tests/fixtures/' / path1, 'r',
+    with open(Path(__file__).parent.parent.parent / 'tests/fixtures/' / path1, 'r',
               encoding='utf-8') as path_1:
-        with open(Path.cwd() / 'tests/fixtures/' / path2, 'r',
+        with open(Path(__file__).parent.parent.parent / 'tests/fixtures/' / path2, 'r',
                   encoding='utf-8') as path_2:
             if type_of_file == 'json':
                 dict1 = json.load(path_1)
