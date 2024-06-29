@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def test_json_dicts():
-    with open(Path.cwd() / 'fixtures/dicts_from_json.txt', 'r',
+    with open(Path(__file__).parent / 'fixtures/dicts_from_json.txt', 'r',
               encoding='utf-8') as json_dicts:
         dict1, dict2 = ast.literal_eval(json_dicts.read().strip())
     previous = os.getcwd()
