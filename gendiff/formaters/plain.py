@@ -1,8 +1,10 @@
 def plain(ini_dict):
     keys_list = get_keys_list(ini_dict)
     values_list = get_list_of_values(ini_dict)
-    list_of_paths = get_paths(ini_dict, keys_list)
-    fin_paths_list = fix_paths_list(list_of_paths)
+    keys_value_list = get_key_value(ini_dict)
+    row_paths_list = run_getpath(ini_dict, keys_value_list)
+    gen_paths_list = get_gen_path_list(row_paths_list)
+    fin_paths_list = fix_paths_list(gen_paths_list)
     list_to_sort = merge_list_to_sort(keys_list, fin_paths_list, values_list)
     frame = get_data_frame(list_to_sort)
     data_frame_to_print = fix_frame(frame)
@@ -41,36 +43,50 @@ def get_list_of_values(some_dict):
     return list_of_values
 
 
-# Получить путь до ключей с изменениями (включая сам ключ)
-paths_list = []
+key_value_list = []
 
 
-def find_path(in_dict, key):
-    if not isinstance(in_dict, dict):
-        return None
-    if key in in_dict.keys():
-        return key
-    resp = None
-    for in_dict_key in in_dict.keys():
-        rep = find_path(in_dict[in_dict_key], key)
-        if rep is None:
-            continue
+def get_key_value(some_dict):
+    for keys, value in some_dict.items():
+        if isinstance(value, dict):
+            if keys[0:2] in ['+ ', '- ']:
+                key_value_list.append((keys, value))
+            get_key_value(value)
         else:
-            resp = "{}.{}".format(in_dict_key, rep)
-    return resp
+            if keys[0:2] in ['+ ', '- ']:
+                key_value_list.append((keys, value))
+    return key_value_list
 
 
-# Вызывающая функция по получению путей
-def get_paths(in_dict, k_list):
-    for key in k_list:
-        paths_list.append(find_path(in_dict, key))
-    return paths_list
+def getpath(nested_dict, search_value):
+    for key, value in nested_dict.items():
+        if (key, value) == search_value:
+            return [key]
+        if type(nested_dict[key]) is dict:
+            path = getpath(nested_dict[key], search_value)
+            if path is not None:
+                return [key] + path
+    return None
+
+
+def run_getpath(some_dict, k_v_list):
+    row_paths_list = []
+    for k in k_v_list:
+        row_paths_list.append(getpath(some_dict, k))
+    return row_paths_list
+
+
+def get_gen_path_list(row_paths_list):
+    gen_paths_list = []
+    for i in row_paths_list:
+        gen_paths_list.append('.'.join(i))
+    return gen_paths_list
 
 
 # Очистка путей от маркировки (+/-)
-def fix_paths_list(path_list):
+def fix_paths_list(paths_list):
     fin_paths_list = []
-    for row in path_list:
+    for row in paths_list:
         row1 = row.split(".")
         row2 = [i.strip(" +-") for i in row1]
         fin_row = ".".join(row2)
@@ -142,5 +158,6 @@ def get_data_frame(d):
 def fix_frame(frame0):
     frame1 = [x.replace("'False'", "false") for x in frame0]
     frame2 = [x.replace("'None'", "null") for x in frame1]
-    fin_frame = [x.replace("'True'", "true") for x in frame2]
+    frame3 = [x.replace("'True'", "true") for x in frame2]
+    fin_frame = [x.replace("'0'", '0') for x in frame3]
     return fin_frame
