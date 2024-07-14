@@ -11,21 +11,16 @@ from gendiff.formaters.json import make_json
 
 def start_diff():
     args = path_parser()
-    generate_diff(args.first_file, args.second_file, args.format)
+    diff = generate_diff(args.first_file, args.second_file, args.format)
+    result_string = release_diff(diff, args.format)
+    print(result_string)
 
 
 def generate_diff(path_file1, path_file2, format_name='stylish'):  # 1
     type_of_files = get_files_type(path_file1, path_file2)  # 2
     dict_1, dict_2 = make_dicts(path_file1, path_file2, type_of_files)  # 3
-    frame_to_print = perform_compare(dict_1, dict_2)  # 4
-    result = release_diff(frame_to_print, format_name)  # 5
-    if format_name == 'plain':
-        for i in result:
-            print(i)
-        return result
-    else:
-        print(result)
-        return result
+    frame = perform_compare(dict_1, dict_2)  # 4
+    return frame
 
 
 def get_files_type(path1, path2):  # 2
@@ -59,8 +54,8 @@ def make_dicts(path1, path2, type_of_file):  # 3
 # получениe представления (словаря с diff) # 4
 def perform_compare(dict1, dict2):
     run_compare(dict1, dict2)
-    frame_to_print = run_compare(dict1, dict2)
-    return frame_to_print
+    frame = run_compare(dict1, dict2)
+    return frame
 
 
 # вызов форматеров

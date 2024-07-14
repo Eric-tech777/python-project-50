@@ -21,5 +21,4 @@ def stylish(ini_dict, replacer=' ', count_space=4, rank=1):
         result += replacer * count_space * (rank - 1) + '}'
     else:
         result = str(ini_dict)
-
     return result
